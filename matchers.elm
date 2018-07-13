@@ -35,7 +35,7 @@ type alias Model =
 
 init : (Model, Cmd Msg)
 init =
-  (Model "" [], 0, "", 0, "" [], Cmd.none )
+  (Model "", 0, "", 0, "", Cmd.none )
 
 
 
@@ -46,6 +46,7 @@ type Msg
   = Input String
   | Send
   | NewMessage String
+
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -80,17 +81,16 @@ view model =
     [ input [onInput Input] []
     , button [onClick Send] [text "Send"]
     , div [id "match-div"]
-      [ img [ id "match-stack" ]
-      , p [ id "match-counter" ]
+      [ img [ id "match-stack", src ""] []
+      , p [ id "match-counter" ] []
       , div [ id "game-div" ]
-        [ p [ id "game-text" ]
-        , button [ text "X1"]
-        , button [ text "X2"]
-        , button [ text "X3"]
-        ]
+        [ p [ id "game-text" ] []
+        , button [ ][text "X1"]
+        , button [ ][text "X2"]
+        , button [ ][text "X3"]
       ]
-
-    , div [id "game-console"] (List.map viewMessage (List.reverse model.messages))
+    , div [id "game-console"] (List.map viewMessage model.messages)
+     ]
     ]
 viewMessage : String -> Html msg
 viewMessage msg =
